@@ -5,232 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thrift Store</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
         }
 
-        header nav ul {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
             list-style: none;
-            padding: 0;
-        }
-
-        header nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        header nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        footer {
-            text-align: center;
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Home Page */
-        .home {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .product-gallery {
             display: flex;
-            justify-content: center;
-            gap: 30px;
+            justify-content: space-around;
         }
 
-        .product {
-            background-color: white;
-            border-radius: 5px;
-            padding: 15px;
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+        }
+
+        nav a:hover, nav a:focus {
+            color: #666;
+            outline: none;
+        }
+
+        .header {
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
+            padding: 2rem 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .product img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
-        .product-name {
-            font-size: 18px;
-            margin: 10px 0;
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a:focus {
+            color: #666;
+            outline: none;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
         }
 
         .price {
-            font-size: 16px;
-            font-weight: bold;
-            color: green;
+            color: #e91e63;
+            font-size: 1.2rem;
+            margin-top: 1rem;
         }
 
-        /* Video Section */
-        .video {
-            margin-top: 30px;
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
         }
 
-        .video video {
+        .contact-form {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
             width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        /* About, Contact Page */
-        .about, .contact {
-            margin: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        form input, form textarea {
-            padding: 10px;
-            font-size: 16px;
+        button {
+            background-color: #e91e63;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             width: 100%;
-            max-width: 400px;
-            margin: 5px 0;
         }
 
-        /* Media Queries for Responsiveness */
+        button:hover, button:focus {
+            background-color: #c2185b;
+            outline: none;
+        }
+
         @media (max-width: 768px) {
-            .product-gallery {
+            nav ul {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
-
-            header nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-
-            .video video {
-                width: 100%;
-                max-width: none;
+            
+            .product-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <h1>Thrift Store</h1>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Navigation Bar -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#shop">Shop</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <h1>Welcome to Thrift Store</h1>
+            <p>Find great deals at our thrift store</p>
+        </div>
     </header>
 
-    <!-- Main Content: Home Page -->
-    <section id="home" class="home">
-        <h1>Welcome to Our Thrift Store!</h1>
-        <p>Find unique and affordable treasures. Sustainable shopping for everyone!</p>
+    <main class="container">
+        <section id="products">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://source.unsplash.com/random/400x300/?product1" alt="Blue T-shirt" class="product-image">
+                    <h3>Blue T-shirt</h3>
+                    <p>$25.00</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <!-- Add more product cards -->
+            </div>
+        </section>
 
-        <!-- Product Gallery -->
-        <div class="product-gallery">
-            <div class="product">
-                <img src="https://via.placeholder.com/250" alt="Product 1">
-                <p class="product-name">Vintage Chair</p>
-                <p class="price">$25.00</p>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250" alt="Product 2">
-                <p class="product-name">Antique Lamp</p>
-                <p class="price">$30.00</p>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250" alt="Product 3">
-                <p class="product-name">Old Vinyl Records</p>
-                <p class="price">$15.00</p>
-            </div>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form class="contact-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Thrift Store. All rights reserved.</p>
         </div>
-
-        <!-- Promotional Video -->
-        <div class="video">
-            <h2>Check Out Our Latest Collection!</h2>
-            <video width="600" controls>
-                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h1>About Us</h1>
-        <p>We are a family-owned thrift store dedicated to offering pre-loved, vintage, and sustainable items. Our goal is to help reduce waste by giving old items a new life.</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h1>Contact Us</h1>
-        <p>Have questions? Reach out to us below:</p>
-        <form onsubmit="validateForm(event)">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Your Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Thrift Store | All Rights Reserved</p>
-        <p><a href="#contact">Contact Us</a> | <a href="#about">About Us</a></p>
     </footer>
-
-    <script>
-        // Simple form validation example
-        function validateForm(e) {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (!name || !email || !message) {
-                e.preventDefault();
-                alert('Please fill in all fields.');
-            }
-        }
-    </script>
 </body>
 </html>
